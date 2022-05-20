@@ -38,6 +38,14 @@ app.get("/", (req,res) => {
     res.send ("hello world")
 });
 
+app.get('/books/:id', async (req,res) => {
+    try {
+        res.json(await Books.findById(req.params.id));
+    } catch (error) {
+        res.status(400).json(error)
+    }
+})
+
 app.get('/books', async (req,res) => {
     try {
         res.json(await Books.find({}));
